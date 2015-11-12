@@ -1454,7 +1454,7 @@ en:
           description: Use code to survive in a Minecraft world!
           Craft: Craft
         mc:
-          title: Minecraft
-          description_short: Code your world.
+          title: Minecraft: Code your World
+          description_short: Explore your Minecraft world by dragging and dropping blocks of code.
           description: Explore your Minecraft world by dragging and dropping blocks of code.
           Hour of Code 2015: Hour of Code 2015
