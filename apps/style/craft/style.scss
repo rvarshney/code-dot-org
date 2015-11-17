@@ -757,6 +757,11 @@ $height-to-width: 434 / 477;
     }
   }
 
+  .win-feedback .generatedCode {
+    // max "you win" dialog "show code" code height
+    max-height: 80px;
+  }
+
   .dialog-title {
     @include mc-text-shadow();
     color: #F4D00B;
