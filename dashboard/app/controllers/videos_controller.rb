@@ -97,7 +97,7 @@ class VideosController < ApplicationController
       Video.new(
         key: key,
         youtube_code: key,
-        download: Video.download_url(key)
+        download: params[:download_url] || Video.download_url(key)
       )
   end
 

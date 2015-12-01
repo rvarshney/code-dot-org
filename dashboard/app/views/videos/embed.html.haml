@@ -33,4 +33,6 @@
   :javascript
     var width = $(window).width();
     var height = $(window).height();
+    console.log($(window));
+    console.log("width, height", width, height);
     createVideoWithFallback($('#video-container'), #{video_info.to_json}, width, height);

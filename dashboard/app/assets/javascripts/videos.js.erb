@@ -1,6 +1,8 @@
 //= require ../../../../shared/js/url_test/url_test.js
 
 function createVideoWithFallback(parentElement, options, width, height) {
+  width = "100%";
+  height = "100%";
   upgradeInsecureOptions(options);
   var video = createVideo(options);
   video.width(width).height(height);
@@ -208,14 +210,14 @@ function youTubeAvailabilityEndpointURL() {
 function addFallbackVideoPlayer(videoInfo, playerWidth, playerHeight) {
   var fallbackPlayerID = 'fallbackPlayer' + Date.now();
   var playerCode =
-      '<div><video id="'+ fallbackPlayerID +'" ' +
+      '<video id="'+ fallbackPlayerID +'" ' +
       'width="' + playerWidth + '" height="' + playerHeight + '" ' +
       (videoInfo.autoplay ? 'autoplay ' : '') +
       'class="video-js vjs-default-skin vjs-big-play-centered" ' +
       'controls preload="auto" ' +
       'poster="' + videoInfo.thumbnail + '">' +
       '<source src="' + videoInfo.download + '" type="video/mp4"/>' +
-      '</video></div>';
+      '</video>';
 
   // Swap current #video with new code
   $('#video').replaceWith(playerCode);
