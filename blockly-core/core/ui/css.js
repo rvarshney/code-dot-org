@@ -73,9 +73,9 @@ Blockly.Css.inject = function(container) {
  * In most cases, it may be easier to call the setCursor helper on
  * BlockSpaceEditor than to use this method directly.
  * @param {Blockly.Cursor} cursor Enum.
- * @param {?SVGElement} opt_svg The blockSpace svg object to also set the cursor on.
+ * @param {?Blockly.BlockSpaceEditor} opt_blockSpaceEditor The BlockSpaceEditor to also set the cursor on.
  */
-Blockly.Css.setCursor = function(cursor, opt_svg) {
+Blockly.Css.setCursor = function(cursor, opt_blockSpaceEditor) {
   if (Blockly.readOnly) {
     return;
   }
@@ -122,8 +122,8 @@ Blockly.Css.setCursor = function(cursor, opt_svg) {
 
   // Set cursor on the SVG surface as well, so that rapid movements
   // don't result in cursor changing to an arrow momentarily.
-  if (opt_svg) {
-    setCursorOnBackgroundElement(opt_svg);
+  if (opt_blockSpaceEditor) {
+    setCursorOnBackgroundElement(opt_blockSpaceEditor.svg_);
   }
 };
 

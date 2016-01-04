@@ -616,7 +616,7 @@ Blockly.BlockSpaceEditor.prototype.getToolboxWidth = function() {
 * @param {Blockly.Cursor} cursorType Enum.
 */
 Blockly.BlockSpaceEditor.prototype.setCursor = function(cursorType) {
-  Blockly.Css.setCursor(cursorType, this.svg_);
+  Blockly.Css.setCursor(cursorType, this);
 };
 
 /**

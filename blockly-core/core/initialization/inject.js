@@ -41,9 +41,11 @@ Blockly.inject = function(container, opt_options, opt_audioPlayer) {
   if (!goog.dom.contains(document, container)) {
     throw 'Error: container is not in current document.';
   }
+  var parsedOptions;
   if (opt_options) {
+    parsedOptions = Blockly.parseOptions_(opt_options);
     // TODO(scr): don't mix this in to global variables.
-    goog.mixin(Blockly, Blockly.parseOptions_(opt_options));
+    goog.mixin(Blockly, parsedOptions);
   }
 
   // Closure can be trusted to create HTML widgets with the proper direction.
@@ -61,7 +63,7 @@ Blockly.inject = function(container, opt_options, opt_audioPlayer) {
   /**
    * @type {Blockly.BlockSpaceEditor}
    */
-  Blockly.mainBlockSpaceEditor = new Blockly.BlockSpaceEditor(container);
+  Blockly.mainBlockSpaceEditor = new Blockly.BlockSpaceEditor(container, parsedOptions);
 
   /**
    * @type {Blockly.BlockSpace}
@@ -141,7 +143,6 @@ Blockly.parseOptions_ = function(options) {
   return {
     RTL: !!options['rtl'],
     collapse: hasCollapse,
-    readOnly: readOnly,
     maxBlocks: options['maxBlocks'] || Infinity,
     assetUrl: options['assetUrl'] || function(path) {
       return './' + path;
