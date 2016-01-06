@@ -411,3 +411,63 @@ MaterialScatterChart.prototype.render_ = function (dataTable, options) {
 MaterialScatterChart.prototype.getDependencies = function () {
   return ['scatter'];
 };
+
+/**
+ * Google Charts API Map Chart
+ *
+ * @see https://developers.google.com/chart/interactive/docs/gallery/map
+ *
+ * @param {Element} targetDiv
+ * @constructor
+ * @extends GoogleChart
+ */
+var MapChart = function (targetDiv) {
+  GoogleChart.call(this, targetDiv);
+};
+MapChart.inherits(GoogleChart);
+GoogleChart.MapChart = MapChart;
+
+/**
+ * @param {google.visualization.DataTable} dataTable
+ * @param {Object} options
+ * @returns {Promise}
+ * @private
+ * @override
+ */
+MapChart.prototype.render_ = function (dataTable, options) {
+  var apiChart = new GoogleChart.lib.visualization.Map(this.targetDiv_);
+  apiChart.draw(dataTable, options);
+  return Promise.resolve();
+};
+
+/**
+ * Array of packages the chart needs to load to render.
+ * @returns {string[]}
+ * @override
+ */
+MapChart.prototype.getDependencies = function () {
+  return ['map'];
+};
+
+/**
+ * @param {string[]} columns
+ * @param {Object[]} data
+ * @private
+ * @override
+ */
+MapChart.prototype.verifyData_ = function (data, columns) {
+  MapChart.superPrototype.verifyData_.call(this, data, columns);
+
+  // Allowed map column configurations:
+  //   address:string[, label:string]
+  //   lat:number, long:number[, label:string]
+
+  if (columns.length > 3) {
+    this.warn('Too many columns for pie chart; only using the first 2.');
+  }
+
+  // TODO: Need to change global GoogleChart validation to allow
+  //       single-column data for maps without complaint
+
+  // TODO: Check column types for map?
+};
