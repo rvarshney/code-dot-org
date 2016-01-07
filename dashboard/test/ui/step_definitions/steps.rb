@@ -405,10 +405,6 @@ Then /^there's an image "([^"]*)"$/ do |path|
   exists.should eq true
 end
 
-Then /^I look for the image div/ do
-  puts @browser.execute_script("return $('#hoc-certificate-small').html()")
-end
-
 Then /^I print the HTML contents of element "([^"]*)"$/ do |element_to_print|
   puts @browser.execute_script("return $('##{element_to_print}').html()")
 end

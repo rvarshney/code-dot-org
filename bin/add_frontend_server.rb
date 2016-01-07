@@ -159,7 +159,7 @@ def determine_unique_name_for_instance_zone(ssh_username, frontend_name, determi
           r.instances.each { |i| i.tags.each { |tag| names << tag.value if tag.key == 'Name' }}
         end
       end
-
+      puts "Looking for name #{name}"
       # Match sure there are not hits against Chef node or client names.
       is_duplicate = aws_instance_names.include?(name) ||
           ssh.exec!("knife node list | egrep \'^#{name}$\'") ||

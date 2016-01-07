@@ -5,6 +5,8 @@ require 'os'
 require 'cdo/hip_chat'
 require 'cdo/rake_utils'
 
+puts "#####################{CDO.rack_env}"
+
 namespace :lint do
   task :ruby do
     RakeUtils.bundle_exec 'rubocop'
