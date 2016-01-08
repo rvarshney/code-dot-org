@@ -6,8 +6,13 @@ class LevelLoader
     end
   end
 
-  def self.level_file_path(name)
-    level_paths = Dir.glob(Rails.root.join("config/scripts/**/#{name}.level"))
+  def self.level_file_path(name, in_progress = false)
+    if in_progress
+      level_paths = Dir.glob(Rails.root.join("config/scripts/**/#{name}.level"))
+    else
+      level_paths = Dir.glob(Rails.root.join("config/scripts/**/#{name}.level_unpublished"))
+    end
+
     raise("Multiple .level files for '#{name}' found: #{level_paths}") if level_paths.many?
     level_paths.first || Rails.root.join("config/scripts/levels/#{name}.level")
   end
