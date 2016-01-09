@@ -151,12 +151,14 @@ exports.logBoxedMessage = function (message) {
 exports.sass = function (srcPath, buildPath, file, includePaths, shouldMinify) {
   var command = 'node-sass' + (shouldMinify ? ' --output-style compressed' : '');
   var extension = (shouldMinify ? '.min.css' : '.css');
+  var cssImporter = '--importer css-inliner.js';
   var includePathArgs = includePaths.map(function (path) {
     return '--include-path ' + path;
   }).join(" \\\n    ");
 
   return [
     command,
+    cssImporter,
     includePathArgs,
     srcPath + file,
     buildPath + path.basename(file, '.scss') + extension

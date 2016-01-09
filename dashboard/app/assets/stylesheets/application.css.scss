@@ -29,7 +29,9 @@
  *= require details-polyfill
  */
 
-// TODO: Move into code-studio.scss when it exists.
+// Note: We can't move this css file into our code-studio.scss because
+// it contains a bunch of relative references to other assets - therefore
+// we have to serve it where it can find its dependencies.
 @import "/code-studio/assets/video-js/video-js.css";
 @import "color";
 @import "font";
