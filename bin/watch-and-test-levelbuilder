@@ -48,7 +48,7 @@ system "echo #{Time.now} > #{LEVELBUILDER_CI_LAST_RUN_FILENAME}" if test_result
 puts "Ran tests, result was #{test_result}"
 
 if test_result
-  puts `./bin/content-push -n "Levelbuilder autocommits" -f`
+  puts `./bin/content-push -n 'Levelbuilder autocommits' -s #{LEVELS_DIR} -f`
 end
 
 File.delete LEVELBUILDER_CI_LOCK_FILENAME
