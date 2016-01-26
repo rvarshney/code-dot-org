@@ -19,7 +19,7 @@ class FeatureModeController < ApplicationController
     @script_names = Gatekeeper.script_names.sort
     @feature_names = Gatekeeper.feature_names.sort
 
-      # If a mode update is still pending, display a notice.
+    # If a mode update is still pending, display a notice.
     if @pending_mode && @current_mode != @pending_mode
       @mode = @pending_mode
       flash[:notice] = PLEASE_WAIT_MESSAGE
@@ -28,6 +28,17 @@ class FeatureModeController < ApplicationController
     else
       @mode = 'custom'
       flash[:alert] = 'The current feature flags do not match any of the pre-defined modes.'
+    end
+  end
+
+  def compute_allows_hash(feature_names, script_names, allows_predicate)
+    hash = {}
+    for feature in feature_names
+      for script in script_names + [null]
+        # null is interpreted to mean a global feature setting not specific to any script.
+        key = [feature, script]
+        hash[key] = allows_predicate.call(feature, script)
+      end
     end
   end
 
