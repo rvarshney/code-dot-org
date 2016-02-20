@@ -347,6 +347,12 @@ td.studentname {
       height: 108px;
     }
 
+    .content-video {
+      float: left;
+      padding: 10px;
+      width: 30%;
+    }
+
     .content-text {
       color: $dark_charcoal;
       float: left;
@@ -355,6 +361,20 @@ td.studentname {
       padding-left: 10px;
       line-height: 22px;
       width: 690px;
+
+      b {
+        font-family: 'Gotham 5r', sans-serif;
+      }
+    }
+
+    .content-text-with-video {
+      color: $dark_charcoal;
+      float: left;
+      max-height:200px;
+      overflow: hidden;
+      padding: 10px;
+      line-height: 22px;
+      width: 70%;
 
       b {
         font-family: 'Gotham 5r', sans-serif;

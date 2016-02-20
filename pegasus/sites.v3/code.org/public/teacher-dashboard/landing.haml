@@ -2,7 +2,14 @@
 layout: none
 theme: none
 content-type: text/ng-template
+video_player: true
 ---
+
+// When video_player.js is included we get the following error in console
+// Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.
+// But without it the video doesn't play in the video player pop-up
+= view 'video_player.js'
+
 
 .teacher-announcements
   = view :teacher_announcements
