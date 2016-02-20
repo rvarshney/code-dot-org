@@ -1,3 +1,4 @@
+var Column = require('./Column.jsx');
 var RotateContainer = require('./RotateContainer.jsx');
 
 /**
@@ -13,16 +14,12 @@ var GameLabView = React.createClass({
     this.props.onMount(this.refs.placeholder.getDOMNode());
   },
 
-  shouldComponentUpdate: function() {
-    // Never update this component - lets other code manage its contents
-    return false;
-  },
-
   render: function () {
-    return <div>
+    return <div ref="placeholder">
       <RotateContainer assetUrl={this.props.assetUrl} />
-      <div ref="placeholder">
-      </div>
+      <Column id="visualizationColumn" noUpdate={true} />
+      <div id="visualizationResizeBar" className="fa fa-ellipsis-v"></div>
+      <Column id="codeWorkspace" noUpdate={true} />
       <div className="clear"></div>
     </div>;
   }

@@ -6,7 +6,6 @@ var levels = require('./levels');
 var codegen = require('../codegen');
 var api = require('./api');
 var apiJavascript = require('./apiJavascript');
-var page = require('./page.html.ejs');
 var utils = require('../utils');
 var dropletUtils = require('../dropletUtils');
 var _ = utils.getLodash();
@@ -18,6 +17,8 @@ var GameLabP5 = require('./GameLabP5');
 var gameLabSprite = require('./GameLabSprite');
 var assetPrefix = require('../assetManagement/assetPrefix');
 var GameLabView = require('./GameLabView.jsx');
+var renderVisualizationColumn = require('./visualizationColumn.html.ejs');
+var renderCodeWorkspace = require('./codeWorkspace.html.ejs');
 
 var MAX_INTERPRETER_STEPS_PER_TICK = 500000;
 
@@ -115,10 +116,11 @@ GameLab.prototype.init = function (config) {
     // this component is mounted.
     onMount: function (rootElement) {
 
-      // Render templates/page.html.ejs into the component root
+      // Render ejs files into the component
       // TODO: Eventually break this out into smaller and smaller ejs
       //       bits until we absorb it all into React (yay!)
-      rootElement.innerHTML = page({
+
+      var ejsScope = {
         assetUrl: this.studioApp_.assetUrl,
         data: {
           visualization: require('./visualization.html.ejs')(),
@@ -132,7 +134,13 @@ GameLab.prototype.init = function (config) {
           pinWorkspaceToBottom: true,
           readonlyWorkspace: config.readonlyWorkspace
         }
-      });
+      };
+      var visualizationColumn = rootElement.querySelector('#visualizationColumn');
+      visualizationColumn.innerHTML = renderVisualizationColumn(ejsScope);
+
+      var codeWorkspace = rootElement.querySelector('#codeWorkspace');
+      codeWorkspace.innerHTML = renderCodeWorkspace(ejsScope);
+
       config.usingReactRoot = true;
       config.loadAudio = this.loadAudio_.bind(this);
       config.afterInject = this.afterInject_.bind(this, config);
